@@ -1,7 +1,7 @@
 import numpy as np
 
 def geometric_mean(img, m, n):
-    '''Calcula a média geométrica entre a imagem img e o filtro w.
+    '''Calcula a média geométrica na imagem img com um filtro de tamanho m por n.
 
         Parâmetros
         ----------
