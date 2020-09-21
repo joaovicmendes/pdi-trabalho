@@ -1,0 +1,53 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[left=3cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+\sloppy
+
+\title{Processamento Digital de Imagens – Trabalho 1\\Filtros de Suavização Não Lineares}
+\author{Guilherme L. Salomão, João Victor M. Freire, \\Martin Heckmann, Renan D. Pasquantonio }
+\date{23 de Setembro de 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+
+    A Filtragem Espacial é uma técnica de processamento de imagens que, diferentemente das transformações pontuais de intensidade, determinam a nova intensidade de um pixel baseado nas intensidades dos pixels em uma determinada vizinhança $m \times n$.
+    
+    Existem duas categorias de filtros espaciais: lineares e não lineares. Os primeiros são caracterizados por algoritmos eficientes, além de resultados analíticos importantes que melhoram sua performance. Podem ser aplicados à imagem através das operações de correlação-cruzada ou de convolução. Já os filtros não-lineares são caracterizados por um alto custo computacional, porém em certos casos é possível obter resultados melhores que os lineares.
+
+\section{Motivação}
+Um dos principais tipos de filtragem espacial é a suavização. Seus principais usos são para tornar objetos de uma imagem mais uniformes ou para remoção de ruídos. Dentre os filtros lineares, estudamos em aula o filtro de média simples e o filtro gaussiano. Agora, neste trabalho, iremos implementar um filtro de suavização usando média geométrica e mediana, que nos permitem obter resultados diferentes daqueles obtidos usando os filtros lineares de suavização.
+
+\section{Explicação do Método Implementado}
+O filtro de média geométrica consiste na aplicação da fórmula $$\hat{f}(x, y) = [\prod _{(s,t) \in S_{xy}} f(s,t)]^{\frac{1}{mn}} $$ na imagem. A intensidade de cada pixel (x, y) é a média geométrica dos valores dos pixels em determinada vizinhança a sua volta, de tamanho mxn. Diferentemente da média aritmética, que consiste na soma de $m \times n$ termos dividido por $m \times n$, a geométrica é o produto desses termos elevados à $\frac{1}{m \times n}$ (ou a raíz $m \times n$ do produto). 
+
+Uma vantagem da média geométrica sobre a aritmética é que ela normaliza os valores, de forma que ao se trabalhar com valores em escalas diferentes, as variações tenham um peso proporcional à escala em que se encontram. Em alguns casos, pode ajudar a preservar detalhes, mas acaba sendo mais utilizada quando os valores de intensidade estão em escala logarítmica ou em grandes intervalos de números, portanto não são tão comuns em imagens.
+
+Já o filtro de mediana consiste na aplicação da fórmula $$ \hat{f}(x,y) = \underset{(s,t)\in S_{xy}}{\mathrm{mediana}} [f(s,t)] $$ na imagem. A intensidade de cada pixel (x, y) é a mediana dos valores dos pixels em determinada vizinhança mxn. A mediana é o valor central no conjunto ordenado dos valores.
+
+É um filtro bastante usado no pré-processamento de imagens, pois tende a preservar bordas, mas remover texturas.
+
+\section{Explicação do Código}
+
+\section{Referências}
+
+Tem que formatar isso aqui:
+
+1. Cesar Henrique Comin, Processamento Digital de Imagens – Aula 8: Filtragem Espacial I.
+
+2. Moacir Ponti Jr., Image Restoration – Image Processing scc0251 <http://wiki.icmc.usp.br/images/7/78/Dip08\_restoration.pdf>
+
+3. Wikipedia - Geometric Mean <https://en.wikipedia.org/wiki/Geometric\_mean>
+
+4. Wikipedia - Median <https://en.wikipedia.org/wiki/Median>
+
+\end{document}
