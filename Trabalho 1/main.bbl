@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{comin2020}
+Cesar~Henrique Comin.
+\newblock Processamento {D}igital de {I}magens – {A}ula 8: {F}iltragem
+  {E}spacial {I}, 2020.
+
+\bibitem{ponti2011}
+Moacir~Ponti Jr.
+\newblock Image {R}estoration – {I}mage {P}rocessing scc0251.
+\newblock \url{http://wiki.icmc.usp.br/images/7/78/Dip08_restoration.pdf},
+  2011.
+
+\bibitem{wiki01}
+Wikipedia.
+\newblock Geometric {M}ean.
+\newblock \url{https://en.wikipedia.org/wiki/Geometric_mean}.
+
+\bibitem{wiki02}
+Wikipedia.
+\newblock Median.
+\newblock \url{https://en.wikipedia.org/wiki/Median}.
+
+\end{thebibliography}
