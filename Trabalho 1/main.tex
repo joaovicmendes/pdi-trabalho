@@ -83,7 +83,7 @@ No contexto de processamento de imagens, e em particular de filtros espaciais n�
 Em alguns casos, a média geométrica pode ajudar a preservar detalhes. É especialmente útil no processo de remoção de ruído Gaussiano e é melhor que a média aritmética na preservação de bordas, mas na prática acaba sendo mais utilizada quando os valores de intensidade estão em escala logarítmica ou com intensidades com grandes intervalos de valores (não costuma ser o caso de imagens).
 
 \subsection{Mediana}
-A mediana divide o conjunto de valores exatamente na metade, o que é feito ordenando o conjunto e selecionando o elemento do meio. Diferentemente da média comum, ela não calcula um valor novo, ela apenas seleciona um dentre os disponíveis.
+A mediana divide o conjunto de valores exatamente na metade, o que é feito ordenando o conjunto e selecionando o elemento do meio.
 
 Em processamento de imagens, pode ser usada para criação de um filtro espacial não-linear de suavização. Consiste na aplicação da fórmula $$ \hat{f}(x,y) = \underset{(s,t)\in S_{xy}}{\mathrm{mediana}} [f(s,t)] $$ na imagem. Assim, a intensidade de cada pixel $(x, y)$ é a mediana das intensidades dos pixels no retângulo $m \times n$ centrado no ponto.
 
