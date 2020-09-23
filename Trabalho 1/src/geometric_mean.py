@@ -13,7 +13,8 @@ def geometric_mean(img, m, n):
             product_region = 1
             for s in range(m):
                 for t in range(n):
-                    product_region *= (img_padded[row+s, col+t])**(1./(m*n))
+                    product_region *= 
+                    (img_padded[row+s, col+t])**(1./(m*n))
             img_filtered[row, col] = product_region
 
     return img_filtered

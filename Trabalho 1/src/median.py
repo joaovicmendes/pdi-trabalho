@@ -19,7 +19,9 @@ def median(img,m,n):
             med_array = np.sort(med_array)
             median = len(med_array)//2
             if(len(med_array)%2 == 0):
-                img_filtered[row][col] = ((med_array[median-1]*0.5)+(med_array[median]*0.5)).astype('uint8')
+                img_filtered[row][col] = ((med_array[median-1]*0.5)
+                                          +(med_array[median]*0.5)
+                                         ).astype('uint8')
             else:
                 img_filtered[row][col] = med_array[median]
     return img_filtered
