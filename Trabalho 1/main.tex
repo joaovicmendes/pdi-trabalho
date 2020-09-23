@@ -7,6 +7,53 @@
 \usepackage{amsthm}
 \usepackage{multirow}
 \usepackage{hyperref}
+\usepackage{listings}
+
+
+% Custom colors
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
 \sloppy
 
@@ -25,13 +72,13 @@
     Existem duas categorias de filtros espaciais: lineares e não lineares. Os primeiros são caracterizados por algoritmos eficientes, além de resultados analíticos importantes que melhoram sua performance. Podem ser aplicados à imagem através das operações de correlação-cruzada ou de convolução. Já os filtros não-lineares são caracterizados por um alto custo computacional, porém em certos casos é possível obter resultados melhores que os lineares.
 
 \section{Motivação}
-Um dos principais tipos de filtragem espacial é a suavização. Seus principais usos são para tornar objetos de uma imagem mais uniformes ou para remoção de ruídos. Dentre os filtros lineares de suavização, estudamos em aula o filtro de média simples e o filtro gaussiano. Agora, neste trabalho, iremos implementar um filtro de suavização usando média geométrica e mediana, que nos permitem obter resultados diferentes daqueles obtidos usando os filtros lineares de suavização.
+Um dos principais tipos de filtragem espacial é a suavização. Seus principais usos são para tornar objetos de uma imagem mais uniformes ou para remoção de ruídos. Dentre os filtros lineares de suavização, estudamos em aula o filtro de média simples e o filtro gaussiano. Agora, neste trabalho, implementamos dois filtros de suavização usando média geométrica e mediana, que nos permitem obter resultados diferentes daqueles obtidos usando os filtros lineares de suavização.
 
 \section{Explicação do Método Implementado}
 
 A média aritmética comum consiste em dividir a soma de $n$ valores por $n$, ou seja $\frac{1}{n}\sum_{j=1}^{n} a_j$. Já a chamada média geométrica é descrita como o produto de $n$ valores elevado à $\frac{1}{n}$, ou seja, $[\prod_{j=1}^{n} a_j]^{\frac{1}{n}}$.
 
-No contexto de processamento de imagens, e em particular de filtros espaciais não-lineares, podemos definir o conjunto dos pixels que devem ser incuídos no produtório como o conjunto $S_{xy}$, que é um retângulo de tamanho $m \times n$ centrado em cada pixel $(x,y)$ da imagem. Assim, definimos a transformação da imagem como $$\hat{f}(x, y) = [\prod _{(s,t) \in S_{xy}} f(s,t)]^{\frac{1}{mn}}, $$ ou então dizemos que a nova intensidade de cada pixel $(x, y)$ é a média geométrica dos pixels à sua volta.
+No contexto de processamento de imagens, e em particular de filtros espaciais não-lineares, podemos definir o conjunto dos pixels que devem ser incuídos no produtório como o conjunto $S_{xy}$, que é um retângulo de tamanho $m \times n$ centrado em cada pixel $(x,y)$ da imagem. Assim, definimos a transformação da imagem como $$\hat{f}(x, y) = [\prod _{(s,t) \in S_{xy}} f(s,t)]^{\frac{1}{mn}},$$ ou então dizemos que a nova intensidade de cada pixel $(x, y)$ é a média geométrica dos pixels à sua volta.
 
 Em alguns casos, a média geométrica pode ajudar a preservar detalhes. É especialmente útil no processo de remoção de ruído Gaussiano e é melhor que a média aritmética na preservação de bordas, mas na prática acaba sendo mais utilizada quando os valores de intensidade estão em escala logarítmica ou com intensidades com grandes intervalos de valores (não costuma ser o caso de imagens).
 
@@ -39,9 +86,35 @@ A mediana divide o conjunto de valores exatamente na metade, o que é feito orde
 
 Em processamento de imagens, pode ser usada para criação de um filtro espacial não-linear de suavização. Consiste na aplicação da fórmula $$ \hat{f}(x,y) = \underset{(s,t)\in S_{xy}}{\mathrm{mediana}} [f(s,t)] $$ na imagem. Assim, a intensidade de cada pixel $(x, y)$ é a mediana das intensidades dos pixels no retângulo $m \times n$ centrado no ponto.
 
-O filtro de mediana é bastante útil no pré-processamento de imagens. É um filtro muito efetivo na remoção de ruídos e texturas, mas que consegue preservar as bordas de uma imagem.
+O filtro de mediana é bastante útil no pré-processamento de imagens. É um filtro muito efetivo na remoção de ruídos e texturas, principalmente em ruídos impulsivos, mas que consegue preservar as bordas de uma imagem.
 
+\newpage
 \section{Explicação do Código}
+\subsection{Média Geométrica}
+No bloco abaixo, podemos ver a definição da função \pythoninline{geometric_mean}:
+\pythonexternal{geometric_mean.py}
+A função \pythoninline{geometric_mean} recebe como parâmetros, \pythoninline{img} sendo a imagem a ser filtrada, \pythoninline{m} e \pythoninline{n} sendo respectivamente a largura e a altura do filtro. A utilização de dois parâmetros responsáveis pela dimensão do filtro permite a utilização de filtros retangulares que proporcionam diferentes resultados de filtragem.
+
+Obtendo as dimensões da imagem com \pythoninline{img.shape} podemos então gerar uma nova imagem chamada \pythoninline{img_padded}, que utilizaremos para a aplicação do filtro. A \pythoninline{img_padded} será uma imagem semelhante à original, mas com algumas adaptações, nela serão acresentadas bordas laterais do tamanho \pythoninline{m/2}, isto é, metade da largura do filtro, e bordas na parte inferior e superior da imagem de tamanho \pythoninline{n/2}, que é a metade da altura do filtro, e esses novos valores serão preenchidos com os valores espelhados da imagem original, não espelhando a borda. 
+
+Esse processo é chamado \textit{wrap around}. Isso é feito para possibilitar a aplicação do filtro em \textit{pixels} próximos a borda da imagem. Já o uso do \textit{wrap around} para essa aplicação proporciona melhores resultados por reutilizar valores que já estão dentro da região do filtro, o que não seria possível caso fosse apenas escolhido algum valor arbitrário. 
+
+Em seguida, iremos acessar cada \textit{pixel}, ou seja, cada elemento da matriz e aplicar o filtro em cada um. A aplicação do filtro consiste na aplicação da fórmula da média geométrica mostrada anteriormente nos valores de dentro do filtro, no entanto, foi feita uma pequena alteração na fórmula durante a implementação para impedir \textit{overflow} durante a multiplicação. Assim, a nova transformação será definida como $$\hat{f}(x, y) = [\prod _{(s,t) \in S_{xy}} f(s,t)^{\frac{1}{mn}}]. $$
+
+O valor final dessa operação é atribuída ao elemento correspondente na imagem final filtrada \pythoninline{img_filtered}, repetindo esse processo para todos os pixels da imagem. E por fim retornando a imagem filtrada.
+
+\subsection{Mediana}
+No bloco abaixo, podemos ver a definição da função \pythoninline{median}:
+\pythonexternal{median.py}
+
+Para o filtro de mediana, recebemos os mesmos parâmetros que o filtro da média geométrica, isto é, \pythoninline{img} sendo a imagem a ser filtrada, a largura \pythoninline{m}, e a altura \pythoninline{n} do filtro. Com isso também geramos uma imagem \pythoninline{img_padded} com \textit{wrap around} da mesma forma que foi implementada em \pythoninline{geometric_mean}.
+
+Após a geração do \pythoninline{img_padded}, será acessado cada pixel da imagem, ou seja, cada elemento da matriz, e para cada um iremos coletar todos os valores ao redor dele, obedecendo o tamanho do filtro, e armazená-los no vetor chamado \pythoninline{med_array.} 
+
+Esse vetor será ordenado para obtermos a mediana, que será o valor central do vetor caso ele tenha um tamanho ímpar, ou a média dos dois valores centrais caso seja um vetor de tamanho par. 
+
+O valor da mediana será atribuído ao elemento correspondente ao atual na imagem filtrada \pythoninline{img_filtered}, e o processo será repetido para todos os pixels da imagem. E por fim retornando a imagem filtrada.
+\newpage
 
 \nocite{comin2020}
 \nocite{ponti2011}
