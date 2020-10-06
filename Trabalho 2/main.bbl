@@ -2,23 +2,12 @@
 
 \bibitem{comin2020}
 {\sc Comin, C.~H.}
-\newblock Processamento {D}igital de {I}magens – {A}ula 8: {F}iltragem
-  {E}spacial {I}, 2020.
-
-\bibitem{ponti2011}
-{\sc Jr., M.~P.}
-\newblock Image {R}estoration – {I}mage {P}rocessing scc0251.
-\newblock \url{http://wiki.icmc.usp.br/images/7/78/Dip08_restoration.pdf},
-  2011.
+\newblock Processamento {D}igital de {I}magens – {A}ula 15: {F}iltragem
+  {E}spacial no {D}omínio da {F}requência 2, 2020.
 
 \bibitem{wiki01}
 {\sc Wikipedia}.
-\newblock Geometric {M}ean.
-\newblock \url{https://en.wikipedia.org/wiki/Geometric_mean}.
-
-\bibitem{wiki02}
-{\sc Wikipedia}.
-\newblock Median.
-\newblock \url{https://en.wikipedia.org/wiki/Median}.
+\newblock Butterworth {F}ilter.
+\newblock \url{https://en.wikipedia.org/wiki/Butterworth_filter}.
 
 \end{thebibliography}
