@@ -8,6 +8,8 @@
 \usepackage{multirow}
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{{./imagens/}}
 
 
 % Custom colors
@@ -93,13 +95,64 @@ A função que vamos utilizar para definir o filtro é:
 $$
 H(\mu, \nu) = \frac{1}{1 + {\frac{D(\mu, \nu)}{D_0}}^{2n}},
 $$
-na qual $D(\mu, \nu) = \sqrt{\mu^2 + \nu^2}$. Os valores $D_0$ e $n$ são parâmetros variáveis, e faremos uma análise dos seus efeitos na próxima sessão do documento. A seguir está nossa implementação do filtro:
+na qual $D(\mu, \nu) = \sqrt{\mu^2 + \nu^2}$. Os valores $D_0$ e $n$ são parâmetros variáveis, e faremos uma análise dos seus efeitos na \hyperref[sec:4]{Seção 4} do documento. A seguir está nossa implementação do filtro:
 \pythonexternal{./src/passa_baixa_butterworth.py}
+
+\[FAZER\]
 
 \subsection{Passa-Alta}
 
+\[FAZER\]
+
+
+
+\newpage
 
 \section{Análise dos Parâmetros do Filtro}
+\label{sec:4}
+Os filtros Butterworth recebem dois parâmetros: $D_0$ e $n$. Testamos diferentes valores de cada um para analisarmos como eles afetam o filtro resultante. Fizemos os experimentos com os valores $D_0 = \{0,01; 0,05; 0,10\}$ e de $n = \{1, 3, 5\}$. 
+
+Para esses valores, obtivemos os seguintes filtros passa-baixa:
+
+\vspace{1em}
+\begin{center}
+	\includegraphics[width=\textwidth]{filtros_low_pass}
+\end{center}
+\vspace{1em}
+
+Observando os filtros, ficou claro que conforme $D_0$ cresce, o raio das frequências permitidas também cresce. Assim, um valor pequeno de $D_0$ vai fazer uma suavização maior da imagem. Já ao observarmos o parâmetro $n$, percebe-se que que seu valor esta associado com a suavidade da transição entre as frequências permitidas, de forma que um valor grande de $n$ se aproxima de um filtro passa-baixa ideal. A seguir, aplicamos os filtros a uma imagem.
+
+\vspace{1em}
+\begin{center}
+	\includegraphics[width=\textwidth]{imagens_low_pass}
+\end{center}
+\vspace{1em}
+
+Nota-se que, conforme o valor de $n$ cresce e nosso filtro fica mais abrupto, os artefatos de ondulação percebidos no filtro passa-baixa ideal também acontecem aqui. É possível confirmar que o valor de $D_0$ controla o nível da suavização, sendo bastante intensa nos casos em que seu valor é muito pequeno.
+
+Efeitos análogos acontecem no filtro passa-alta. O parâmetro $n$ continua no mesmo lugar, portanto têm o mesmo efeito de controlar a suavidade da transição entre as frequências permitidas e eliminadas. Já a razão que continha $D_0$, $\frac{D(\mu,\nu)}{D_0}$, se tornou $\frac{D_0}{D(\mu,\nu)}$. Assim, $D_0$ passou a controlar o raio das frequências que serão eliminadas.
+
+\vspace{1em}
+\begin{center}
+	\includegraphics[width=\textwidth]{filtros_high_pass}
+\end{center}
+\vspace{1em}
+
+Já ao analisarmos as imagens com o filtro aplicado, percebemos que 
+
+\[FAZER\]
+
+Assim sendo, chegamos à conclusão que a melhor forma de escolher os valores de $D_0$ e $n$.
+
+\[FAZER\]
+
+\vspace{1em}
+\begin{center}
+	\includegraphics[width=\textwidth]{imagens_high_pass}
+\end{center}
+\vspace{1em}
+
+\newpage
 
 \nocite{comin2020}
 \nocite{wiki01}
