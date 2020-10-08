@@ -114,7 +114,7 @@ na qual $D(\mu, \nu) = \sqrt{\mu^2 + \nu^2}$.
 \pythonexternal{./src/passa_alta_butterworth.py}
 De forma similar ao filtro passa baixa, também é utilizada a função \pythoninline{generate_frequencies} para gerar as frequências na Transformada de Fourier com as dimensões da imagem, após isso será criado a matriz \pythoninline{high_pass_butterworth} que irá armazenar os valores do filtro depois de serem calculados. Dentro do loop é armazenado em cada elemento de \pythoninline{high_pass_butterworth} o resultado da função que define o filtro na mesma posição, com os valores de \pythoninline{d0} e \pythoninline{n} definidos na chamada da função.
 
-
+\newpage
 \section{Análise dos Parâmetros do Filtro}
 \label{sec:4}
 Os filtros Butterworth recebem dois parâmetros: $D_0$ e $n$. Testamos diferentes valores de cada um para analisarmos como eles afetam o filtro resultante. Fizemos os experimentos com os valores $D_0 = \{0,01; 0,05; 0,10\}$ e de $n = \{1, 3, 5\}$. 
