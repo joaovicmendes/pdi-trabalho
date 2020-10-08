@@ -76,7 +76,7 @@ $$
 $$
 na qual $F$ e $G$ são as transformadas de $f$ e $g$, respectivamente, e $\mathscr{F}^{-1}$ é a transformada inversa de Fourier.
 
-Esse teorema nos permite aplicar qualquer filtro linear à uma imagem no domínio da frequência. Dependendo do tamanho dos filtros que utilizarmos, esse método de filtragem é mais eficiente que a convolução e correlação-cruza comum.
+Esse teorema nos permite aplicar qualquer filtro linear à uma imagem no domínio da frequência. Dependendo do tamanho dos filtros que utilizarmos, esse método de filtragem é mais eficiente que a convolução e correlação-cruzada comum.
 
 \section{Motivação}
 Dentre os diversos filtros que podemos aplicar no domínio da frequência usando a transformada, dois que temos um interesse particular são os filtros passa-baixa e passa-alta.
@@ -89,7 +89,7 @@ São diversos os filtros de passa-baixa e passa-alta. Em aula, fomos apresentado
 
 \newpage
 
-\section{Explicação do Método Implementado FAZER SEÇÃO}
+\section{Explicação do Método Implementado}
 \subsection{Passa-Baixa}
 A função que vamos utilizar para definir o filtro é:
 $$
@@ -99,7 +99,10 @@ na qual $D(\mu, \nu) = \sqrt{\mu^2 + \nu^2}$. Os valores $D_0$ e $n$ são parâm
 
 \pythonexternal{./src/passa_baixa_butterworth.py}
 
+A função \pythoninline{generate_frequencies} é utilizada para gerar as frequências na Transformada de Fourier com as dimensões da imagem, após isso será criado a matriz \pythoninline{low_pass_butterworth} que irá armazenar os valores do filtro depois de serem calculados. Dentro do loop é armazenado em cada elemento de \pythoninline{low_pass_butterworth} o resultado da função que define o filtro na mesma posição, com os valores de \pythoninline{d0} e \pythoninline{n} definidos na chamada da função.
 
+
+\newpage
 \subsection{Passa-Alta}
 
 No caso do filtro passa-alta, a função que define o filtro é:
@@ -109,8 +112,8 @@ $$
 na qual $D(\mu, \nu) = \sqrt{\mu^2 + \nu^2}$.
 
 \pythonexternal{./src/passa_alta_butterworth.py}
+De forma similar ao filtro passa baixa, também é utilizada a função \pythoninline{generate_frequencies} para gerar as frequências na Transformada de Fourier com as dimensões da imagem, após isso será criado a matriz \pythoninline{high_pass_butterworth} que irá armazenar os valores do filtro depois de serem calculados. Dentro do loop é armazenado em cada elemento de \pythoninline{high_pass_butterworth} o resultado da função que define o filtro na mesma posição, com os valores de \pythoninline{d0} e \pythoninline{n} definidos na chamada da função.
 
-\newpage
 
 \section{Análise dos Parâmetros do Filtro}
 \label{sec:4}
