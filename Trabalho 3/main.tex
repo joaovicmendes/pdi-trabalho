@@ -1,0 +1,85 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[left=3cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath, mathrsfs, amssymb, mathtools}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{{./imagens/}}
+
+
+% Custom colors
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+    language=Python,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+\sloppy
+
+\title{Processamento Digital de Imagens – Trabalho 3\\Detecção de Componentes Conexos com Flood Fill}
+\author{Guilherme L. Salomão, João Victor M. Freire, \\Martin Heckmann, Renan D. Pasquantonio }
+\date{14 de Outubro de 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+
+\section{Motivação}
+
+\section{Explicação do Método Implementado}
+
+\section{Explicação do Código}
+
+
+\nocite{comin2020}
+\nocite{wiki01}
+
+\bibliographystyle{acm}
+\bibliography{references}
+
+\end{document}
