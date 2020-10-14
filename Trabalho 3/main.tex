@@ -68,8 +68,20 @@
 \maketitle
 
 \section{Introdução}
+Existem diversas formas de transformarmos uma imagem em escala de cinza em uma imagem binária, isto é, em uma imagem que só tem dois valores de intensidade. Essas são bastante úteis no processamento digital de imagens, pois é uma forma de simplificar a informação contida em tal imagem. Em particular, essa técnica é útil no processo de segmentação de objetos.
+
+Em uma imagem binária, podemos considerar valores não nulos como objetos e, assim, é interessante descobrir o conjunto de coordenadas que o representa. Para isso utilizamos técnicas de detecção de componentes conexos.
+
+Um componente conexo é definido como um conjunto de pixels conectados. Ou seja, definida uma vizinhança, é possível sair de um ponto $(x, y)$ do objeto e atingir todos os outros pontos dele passando apenas por vizinhos de mesma intensidade. Uma possível é a vizinhança-4, que considera como vizinhos os pixels acima, abaixo, à esquerda e à direita. A vizinhança-8 adiciona os quatro pixels da diagonal aos considerados pela 4.
 
 \section{Motivação}
+
+Existem métodos de extração de componentes conexos que percorrem toda a imagem categorizando todos os componentes existentes com um rótulo diferente. No entanto, esse é um algoritmo que percorre a imagem toda mais de uma vez. Em determinadas aplicações, não é necessário encontrarmos todos os componentes conexos, mas apenas encontrar um objeto inteiro.
+
+Um exemplo de aplicação que tem essa necessidade é a ferramenta \textit{balde de tinta}, muito comum em programas de edição de imagens. Essa ferramenta, ao selecionar um pixel, altera a cor de todos os pixels adjacentes que possuem a mesma intensidade do selecionado.
+
+O algoritmo que desempenha essa função de encontrar os pontos de um objeto, a partir de uma origem, é chamado de \textit{Flood Fill}. Sua implementação e teste será o objeto de estudo neste terceiro trabalho prático.
+
 
 \section{Explicação do Método Implementado}
 
