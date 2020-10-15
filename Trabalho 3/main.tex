@@ -9,6 +9,8 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage[skip=-5pt]{caption}
+\captionsetup{font={stretch=0.6,small}} 
 \graphicspath{{./imagens/}}
 
 
@@ -84,11 +86,45 @@ O algoritmo que desempenha essa função de encontrar os pontos de um objeto, a 
 
 
 \section{Explicação do Método Implementado}
+\subsection{Implementação com Busca em Largura}
+Uma das formas de implementar o Flood Fill é através de uma busca em largura na imagem. A seguir, está uma implementação utilizando BFS e vizinhança-4.
 
-\section{Explicação do Código}
+\pythonexternal{./src/flood_fill_bfs.py}
 
+A função \pythoninline{flood_fill()} recebe a imagem que contém o objeto e um ponto dele, chamado \pythoninline{origin}. A variável \pythoninline{obj} armazenará as coordenadas encontradas do objeto. As estruturas auxiliares \pythoninline{visited} e \pythoninline{queue} irão armazenar os pontos já visitados e uma fila de pontos que ainda devemos visitar, respectivamente.
+
+Inicialmente colocamos a origem na fila e entramos no laço principal. Enquanto ainda houverem pontos nela, selecionamos o da frente e, caso ainda não tenha sido visitado, adicionamos ao objeto. Na primeira iteração essa operação faz sentido já que a origem é um ponto do objeto, mas para as demais devemos garantir que só pontos do objeto entrem na fila.
+
+Para cada ponto da fila, olhamos quatro vizinhos, com coordenadas \pythoninline{up}, \pythoninline{down}, \pythoninline{left}, e \pythoninline{right}. É preciso levar em consideração pontos que podem estar na borda da imagem e que, portanto, têm apenas dois ou três vizinhos. Para isso verificamos se \pythoninline{(row, col)} tem valores \pythoninline{0}, \pythoninline{img_shape[0]-1}, ou \pythoninline{img_shape[1]-1}. Para os vizinhos válidos, devemos coloca-los na fila se ainda não foram visitados, e se tiverem a mesma intensidade da origem. Essa última verificação nos garante que todos os pontos colocados na fila cumprem os critérios para serem parte do objeto.
+
+A seguir estão alguns testes realizados em imagens vistas em aula.
+
+\vspace{1em}
+\begin{center}
+	\includegraphics[width=\textwidth]{bfs_objetos1.png}
+\end{center}
+\vspace{1em}
+
+
+\vspace{1em}
+\begin{center}
+	\includegraphics[width=\textwidth]{bfs_objetos2.png}
+\end{center}
+\vspace{1em}
+
+\newpage
+
+\subsection{Implementação com Busca em Largura}
+É possível implementarmos o Flood Fill utilizando também uma busca em profundidade. Basta substituir a fila na implementação anterior por uma pilha ou utilizar a pilha da recursão. Decidimos, então, implementar uma versão recursiva do código com o objetivo de mudar a cor de um objeto, simulando o efeito \textit{balde de tinta}.
+
+\pythonexternal{./src/flood_fill_dfs.py}
+
+Aqui, a função recebe um ponto de origem (\pythoninline{origin}), a imagem e uma cor alternativa usada para substituir a cor original do objeto (\pythoninline{replacement}). Então, o algoritmo acessa o ponto de origem, verifica se a cor é igual a do objeto ou não é a desejada. Caso atenda essas condições, então tem sua cor trocada e a função é chamada recursivamente para seus quatro vizinhos, novamente respeitando as bordas da imagem.
+
+\newpage
 
 \nocite{comin2020}
+\nocite{comin2021}
 \nocite{wiki01}
 
 \bibliographystyle{acm}
